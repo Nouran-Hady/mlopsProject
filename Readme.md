@@ -16,7 +16,7 @@ numpy
 Installation
 Clone the Repository:
 
-git clone [https://github.com/SamaOkasha28/AIS477_project.git](https://github.com/Nouran-Hady/mlopsProject.git)
+git clone [https://github.com/Nouran-Hady/mlopsProject.git]
 
 Install Python Dependencies:
 pip install --no-cache-dir -r requirements.txt
