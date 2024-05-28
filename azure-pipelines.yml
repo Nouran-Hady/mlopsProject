@@ -41,9 +41,9 @@ stages:
   variables:
     acrsecret: k8sexamplesacrauth
     acrdevurl: 'k8sexamplesacr.azurecr.io'
-    # replicaNo: 3
+    replicaNo: 1
     imagePullPolicy: Always
-    progressDeadlineSeconds: 1000
+    progressDeadlineSeconds: 3000
 
   jobs:
   - job: Deploy
