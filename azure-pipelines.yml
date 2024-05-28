@@ -33,6 +33,7 @@ stages:
         artifact: 'manifests'
         publishLocation: 'pipeline'
         
+        
 - stage: Deploy
   displayName: Deploy to Dev
   dependsOn: Build
@@ -41,7 +42,9 @@ stages:
     acrsecret: k8sexamplesacrauth
     acrdevurl: 'k8sexamplesacr.azurecr.io'
     replicaNo: 3
-    progressDeadlineSeconds: 600
+    imagePullPolicy: Always
+    progressDeadlineSeconds: 1000
+
   jobs:
   - job: Deploy
   # - deployment: Deploy
@@ -84,7 +87,7 @@ stages:
             inputs:
               action: 'createSecret'
               kubernetesServiceConnection: 'K8S'
-              namespace: 'default'
+              namespace: $(k8sNamespace)
               secretType: 'dockerRegistry'
               secretName: '$(acrsecret)'
               dockerRegistryEndpoint: 'K8SACR'
@@ -92,7 +95,7 @@ stages:
             inputs:
               action: 'deploy'
               kubernetesServiceConnection: 'K8S'
-              namespace: 'default'
+              namespace: $(k8sNamespace)
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml
