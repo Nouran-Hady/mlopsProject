@@ -41,28 +41,29 @@ stages:
     acrdevurl: 'k8sexamplesacr.azurecr.io'
     replicaNo: 3
   jobs:
-  - deployment: Deploy
+  - job: Deploy
+  # - deployment: Deploy
     displayName: Deploy to AKS
-    environment: 'k8sdev.default'
+    # environment: 'k8sdev.default'
     pool: 
       Default
-    strategy:
-      runOnce:
-        deploy:
-          steps:
+    # strategy:
+    #   runOnce:
+    #     deploy:
+    steps:
           - task: DownloadPipelineArtifact@2
             inputs:
               buildType: 'current'
               artifactName: 'manifests'
               targetPath: '$(Pipeline.Workspace)/manifests'
-          - task: KubernetesManifest@0
-            inputs:
-              action: 'createSecret'
-              kubernetesServiceConnection: 'K8S'
-              namespace: 'default'
-              secretType: 'dockerRegistry'
-              secretName: '$(acrsecret)'
-              dockerRegistryEndpoint: 'K8SACR'
+          # - task: KubernetesManifest@0
+          #   inputs:
+          #     action: 'createSecret'
+          #     kubernetesServiceConnection: 'K8S'
+          #     namespace: 'default'
+          #     secretType: 'dockerRegistry'
+          #     secretName: '$(acrsecret)'
+          #     dockerRegistryEndpoint: 'K8SACR'
           # - task: replacetokens@3
           #   displayName: Replace Tokens
           #   inputs:
