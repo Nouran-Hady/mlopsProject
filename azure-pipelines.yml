@@ -82,6 +82,14 @@ stages:
           #     enableTelemetry: true
           - task: KubernetesManifest@0
             inputs:
+              action: 'createSecret'
+              kubernetesServiceConnection: 'K8S'
+              namespace: 'default'
+              secretType: 'dockerRegistry'
+              secretName: '$(acrsecret)'
+              dockerRegistryEndpoint: 'K8SACR'
+          - task: KubernetesManifest@0
+            inputs:
               action: 'deploy'
               kubernetesServiceConnection: 'K8S'
               namespace: 'default'
