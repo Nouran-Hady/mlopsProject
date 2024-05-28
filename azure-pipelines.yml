@@ -36,10 +36,12 @@ stages:
 - stage: Deploy
   displayName: Deploy to Dev
   dependsOn: Build
+  
   variables:
     acrsecret: k8sexamplesacrauth
     acrdevurl: 'k8sexamplesacr.azurecr.io'
     replicaNo: 3
+    progressDeadlineSeconds: 600
   jobs:
   - job: Deploy
   # - deployment: Deploy
