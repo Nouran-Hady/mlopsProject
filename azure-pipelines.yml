@@ -87,7 +87,7 @@ stages:
             inputs:
               action: 'createSecret'
               kubernetesServiceConnection: 'K8S'
-              namespace: $(k8sNamespace)
+              namespace: default
               secretType: 'dockerRegistry'
               secretName: '$(acrsecret)'
               dockerRegistryEndpoint: 'K8SACR'
@@ -95,7 +95,7 @@ stages:
             inputs:
               action: 'deploy'
               kubernetesServiceConnection: 'K8S'
-              namespace: $(k8sNamespace)
+              namespace: default
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml
